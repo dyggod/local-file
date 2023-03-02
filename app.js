@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const fs = require('fs');
 
 var indexRouter = require('./routes/index');
 
@@ -16,7 +17,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/dist')));
 
 app.use('/', indexRouter);
 
@@ -35,5 +36,11 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// 如果没有public/uploads文件夹，那么创建
+const uploadFolder = path.join(__dirname, 'public/uploads/');
+if (!fs.existsSync(uploadFolder)) {
+  fs.mkdirSync(uploadFolder);
+}
 
 module.exports = app;

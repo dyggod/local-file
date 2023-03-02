@@ -4,8 +4,18 @@
 
 import axios from 'axios'
 
+function getBaseUrl () {
+  let baseUrl = '';
+  if (process.env.NODE_ENV === 'development') {
+    baseUrl = '/api/';
+  } else {
+    baseUrl = window.location.origin
+  }
+  return baseUrl;
+}
+
 const service = axios.create({
-  baseURL: '/api/', // url = base url + request url
+  baseURL: getBaseUrl(), // url = base url + request url
   withCredentials: true, // send cookies when cross-domain requests
   timeout: 30000 // request timeout
 })

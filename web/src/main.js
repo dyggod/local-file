@@ -1,6 +1,11 @@
 import { createApp } from 'vue'
-import antd from 'ant-design-vue'
-import 'ant-design-vue/dist/antd.css'
+import { Button, Col, Row, Uploader, List, Cell, Toast } from 'vant';
+
+import 'vant/lib/index.css';
 import App from './App.vue'
 
-createApp(App).use(antd).mount('#app')
+const app = createApp(App)
+
+app.use(Button).use(Col).use(Row).use(Uploader).use(List).use(Cell).use(Toast)
+
+app.mount('#app')
