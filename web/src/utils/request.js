@@ -17,7 +17,7 @@ function getBaseUrl () {
 const service = axios.create({
   baseURL: getBaseUrl(), // url = base url + request url
   withCredentials: true, // send cookies when cross-domain requests
-  timeout: 30000 // request timeout
+  timeout: 5 * 60 * 1000 // request timeout
 })
 
 // request interceptor
